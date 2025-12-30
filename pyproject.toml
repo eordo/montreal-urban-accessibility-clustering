@@ -4,7 +4,13 @@ version = "0.1.0"
 description = "Montreal urban accessibility clustering"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "geohexgrid>=3.0.0",
+    "geopandas>=1.1.2",
+    "matplotlib>=3.10.8",
+    "pandas>=2.3.3",
+    "seaborn>=0.13.2",
+]
 
 [dependency-groups]
 dev = [
