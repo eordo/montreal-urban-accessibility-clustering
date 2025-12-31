@@ -7,7 +7,7 @@ import seaborn as sns
 from shutil import get_terminal_size
 from final_project.config import (CRS, DATA_DIR, FEATURES_DIR, 
                                   META_DIR, RAW_DIR, ROOT_DIR)
-from final_project.data import poi
+from final_project.data import poi, stm
 from final_project.utils import create_grid, create_map_plot, save_figure
 
 
@@ -73,6 +73,20 @@ def main():
         print("POI data already exists. Loading the most recent version from",
               pois_file.relative_to(ROOT_DIR))
         all_pois = gpd.read_file(pois_file)
+
+    # 2. Get bus stops and metro stations.
+    print_step("STM stops and stations")
+    stops_file = FEATURES_DIR / 'stops.geojson'
+    if not stops_file.is_file():
+        print("Getting STM bus stops and metro stations from the shapefile.")
+        island_shp = RAW_DIR / 'island' / 'limites-terrestres.shp'
+        stm_shp = RAW_DIR / 'stm' / 'stm_arrets_sig.shp'
+        stops = stm.load_transit_stops(stm_shp, island_shp)
+        stops.to_file(stops_file, driver='GeoJSON')
+    else:
+        print("STM data already exists. Loading the most recent version from",
+              stops_file.relative_to(ROOT_DIR))
+        stops = gpd.read_file(stops_file)
 
 
 if __name__ == "__main__":
