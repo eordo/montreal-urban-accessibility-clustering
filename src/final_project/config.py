@@ -4,10 +4,11 @@ from pathlib import Path
 # Project root directory.
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 # Define directories relative to root.
-DATA_DIR = ROOT_DIR / 'data'
-RAW_DIR = DATA_DIR / 'raw'
-FEATURES_DIR = DATA_DIR / 'features'
 IMAGES_DIR = ROOT_DIR / 'images'
+DATA_DIR = ROOT_DIR / 'data'
+FEATURES_DIR = DATA_DIR / 'features'
+META_DIR = DATA_DIR / 'meta'
+RAW_DIR = DATA_DIR / 'raw'
 
 # CRS most appropriate for grid projections in Quebec.
 CRS = 32188
